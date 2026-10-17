@@ -7,11 +7,11 @@ define('APP_TAGLINE', 'A Student Mental Wellness, Awareness, and Support Referra
 define('APP_THEME', 'Suicide Prevention and Mental Health Awareness');
 // Helper to read config from $_ENV, $_SERVER, or getenv() in serverless runtimes
 function get_config_var(string $key, string $default = ''): string {
-    if (isset($_ENV[$key]) && $_ENV[$key] !== '') return (string)$_ENV[$key];
-    if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') return (string)$_SERVER[$key];
+    if (isset($_ENV[$key]) && $_ENV[$key] !== '') return trim((string)$_ENV[$key]);
+    if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') return trim((string)$_SERVER[$key]);
     $val = getenv($key);
-    if ($val !== false && $val !== '') return (string)$val;
-    return $default;
+    if ($val !== false && $val !== '') return trim((string)$val);
+    return trim($default);
 }
 
 // Dynamic Base URL detection (supports local XAMPP subfolder and cloud root domain)
