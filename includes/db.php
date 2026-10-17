@@ -18,7 +18,12 @@ function get_db(): PDO
             PDO::ATTR_EMULATE_PREPARES   => false,
         ];
 
-        if (defined('DB_SSL') && DB_SSL) {
+        $isCloudDb = (defined('DB_SSL') && DB_SSL) || str_contains(DB_HOST, 'tidbcloud.com') || str_contains(DB_HOST, 'aivencloud.com');
+        if ($isCloudDb) {
+            $caPath = __DIR__ . '/cacert.pem';
+            if (file_exists($caPath)) {
+                $options[PDO::MYSQL_ATTR_SSL_CA] = $caPath;
+            }
             $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
         }
 
