@@ -36,7 +36,8 @@ function get_db(): PDO
             die('
                 <div style="font-family:sans-serif; max-width:600px; margin:50px auto; padding:24px; border:1px solid #e2e8f0; border-radius:12px; background:#fff5f5;">
                     <h2 style="color:#c53030; margin-top:0;">Database Connection Notice</h2>
-                    <p style="color:#4a5568;">MindBridge could not connect to MySQL. Please verify that MySQL is started in XAMPP and the database <code>mindbridge_db</code> has been imported.</p>
+                    <p style="color:#4a5568;">MindBridge could not connect to MySQL at <code>' . htmlspecialchars(DB_HOST . ':' . DB_PORT) . '</code>.</p>
+                    <p style="color:#718096; font-size:12px; font-family:monospace; background:#edf2f7; padding:8px; border-radius:6px; word-break:break-all;">' . htmlspecialchars($e->getMessage()) . '</p>
                 </div>
             ');
         }
