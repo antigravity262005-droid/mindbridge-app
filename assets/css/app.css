@@ -1,0 +1,178 @@
+/* MindBridge Custom Design System & CSS Variables */
+:root {
+  --primary: #1f3a93;
+  --primary-hover: #172c72;
+  --primary-light: #eef2ff;
+  --accent: #e8a33d;
+  --accent-hover: #cf8b27;
+  --accent-light: #fef7ed;
+  --bg-main: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+html.dark {
+  --primary: #6366f1;
+  --primary-hover: #818cf8;
+  --primary-light: #1e1b4b;
+  --accent: #fbbf24;
+  --accent-hover: #f59e0b;
+  --accent-light: #451a03;
+  --bg-main: #0b1120;
+  --card-bg: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Fraunces', Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+.max-prose-text {
+  max-width: 75ch;
+}
+
+/* Suspension Bridge SVG Animation */
+.cable-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawCable 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+}
+
+.vertical-cable {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawVertical 1.8s ease-out forwards 1.2s;
+}
+
+.bridge-tower {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeTower 1.2s ease-out forwards 0.1s;
+}
+
+.rising-sun {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: riseSun 2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.6s;
+}
+
+.water-wave {
+  animation: waterShimmer 4s ease-in-out infinite alternate;
+}
+
+@keyframes drawCable {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawVertical {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fadeTower {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes riseSun {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes waterShimmer {
+  0% { transform: translateX(0); opacity: 0.6; }
+  100% { transform: translateX(12px); opacity: 0.9; }
+}
+
+/* Pulsing Live Polling Indicator */
+.live-pulse-dot {
+  position: relative;
+  display: inline-flex;
+  width: 10px;
+  height: 10px;
+}
+.live-pulse-dot::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background-color: #10b981;
+  animation: pulseScale 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseScale {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Mood selector interaction */
+.mood-option input:checked + label {
+  border-color: #1f3a93;
+  background-color: #eef2ff;
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(31, 58, 147, 0.15);
+}
+
+html.dark .mood-option input:checked + label {
+  border-color: #818cf8;
+  background-color: #1e1b4b;
+}
+
+/* Card and button micro-transitions */
+.interactive-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.interactive-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08);
+}
+
+/* Scroll reveal helper */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skeleton Loading Shimmer */
+.skeleton-box {
+  background: linear-gradient(90deg, rgba(226, 232, 240, 0.6) 25%, rgba(241, 245, 249, 0.8) 50%, rgba(226, 232, 240, 0.6) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+html.dark .skeleton-box {
+  background: linear-gradient(90deg, rgba(51, 65, 85, 0.5) 25%, rgba(71, 85, 105, 0.7) 50%, rgba(51, 65, 85, 0.5) 75%);
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Respect Prefers-Reduced-Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
